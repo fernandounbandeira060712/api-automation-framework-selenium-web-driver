@@ -1,14 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
-  <test thread-count="5" name="Default test(failed)">
+<suite name="Failed suite [TestSuite]" guice-stage="DEVELOPMENT">
+  <listeners>
+    <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
+  </listeners>
+  <test thread-count="5" name="Geral(failed)">
+    <groups>
+      <run>
+        <include name="regressivo"/>
+        <include name="contrato"/>
+      </run>
+    </groups>
     <classes>
+      <class name="testes.GetSingleResourceTest">
+        <methods>
+          <include name="validarSchema"/>
+          <include name="validarStatusCode200EResponseBody"/>
+          <include name="setupSuite"/>
+        </methods>
+      </class> <!-- testes.GetSingleResourceTest -->
+      <class name="testes.GetSingleResourceNotFoundTest">
+        <methods>
+          <include name="validarStatusCode404EResponseBody"/>
+          <include name="setupSuite"/>
+        </methods>
+      </class> <!-- testes.GetSingleResourceNotFoundTest -->
+      <class name="testes.GetSingleUserNotFoundTest">
+        <methods>
+          <include name="validarStatusCode404EResponseBody"/>
+          <include name="setupSuite"/>
+        </methods>
+      </class> <!-- testes.GetSingleUserNotFoundTest -->
+      <class name="testes.PostRegisterUnuccessfulTest">
+        <methods>
+          <include name="validarStatusCode400EResponseBody"/>
+          <include name="setupSuite"/>
+        </methods>
+      </class> <!-- testes.PostRegisterUnuccessfulTest -->
+      <class name="testes.PostCreateTest">
+        <methods>
+          <include name="validarStatusCode201EResponseBody"/>
+          <include name="validarSchema"/>
+          <include name="setupSuite"/>
+        </methods>
+      </class> <!-- testes.PostCreateTest -->
+      <class name="testes.PatchUpdateTest">
+        <methods>
+          <include name="validarStatusCode200EResponseBody"/>
+          <include name="validarSchema"/>
+          <include name="setupSuite"/>
+        </methods>
+      </class> <!-- testes.PatchUpdateTest -->
+      <class name="testes.PostLoginSuccessfulTest">
+        <methods>
+          <include name="validarSchema"/>
+          <include name="validarStatusCode200EResponseBody"/>
+          <include name="setupSuite"/>
+        </methods>
+      </class> <!-- testes.PostLoginSuccessfulTest -->
       <class name="testes.PostRegisterSuccessfulTest">
         <methods>
+          <include name="validarSchema"/>
           <include name="validarStatusCode200EResponseBody"/>
           <include name="setupSuite"/>
         </methods>
       </class> <!-- testes.PostRegisterSuccessfulTest -->
+      <class name="testes.PostLoginUnsuccessfulTest">
+        <methods>
+          <include name="validarStatusCode400ECamposObrigatorios" invocation-numbers="0 1 2 3 4 5 6 7"/>
+          <include name="setupSuite"/>
+        </methods>
+      </class> <!-- testes.PostLoginUnsuccessfulTest -->
+      <class name="testes.DeleteTest">
+        <methods>
+          <include name="validarStatusCode204"/>
+          <include name="setupSuite"/>
+        </methods>
+      </class> <!-- testes.DeleteTest -->
+      <class name="testes.GetSingleUsersTest">
+        <methods>
+          <include name="validarSchema"/>
+          <include name="validarStatusCode200EResponseBody"/>
+          <include name="setupSuite"/>
+        </methods>
+      </class> <!-- testes.GetSingleUsersTest -->
+      <class name="testes.PutUpdateTest">
+        <methods>
+          <include name="validarSchema"/>
+          <include name="validarStatusCode200EResponseBody"/>
+          <include name="setupSuite"/>
+        </methods>
+      </class> <!-- testes.PutUpdateTest -->
     </classes>
-  </test> <!-- Default test(failed) -->
-</suite> <!-- Failed suite [Default suite] -->
+  </test> <!-- Geral(failed) -->
+</suite> <!-- Failed suite [TestSuite] -->

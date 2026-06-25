@@ -16,21 +16,29 @@ public class PutUpdateTest extends BaseTest {
 
     @Test(groups = {"regressivo"})
     public void validarStatusCode200EResponseBody() {
+
         putComLoginNoBody(
                 ENDPOINT_PUT_UPDATE.getEndPoint(),
-                requestBodyNameJob(USUARIO_VALIDO_UPDATE.getName(), USUARIO_VALIDO_UPDATE.getJob()))
+                requestBodyNameJob(
+                        USUARIO_VALIDO_UPDATE.getName(),
+                        USUARIO_VALIDO_UPDATE.getJob()))
                 .statusCode(SC_OK)
-                .body("name", equalTo("morpheus"))
-                .body("job", equalTo("zion resident"))
-                .body("updatedAt", matchesPattern("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z"));
+                .body("name", equalTo(USUARIO_VALIDO_UPDATE.getName()))
+                .body("job", equalTo(USUARIO_VALIDO_UPDATE.getJob()))
+                .body("updatedAt",
+                        matchesPattern("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z"));
     }
 
     @Test(groups = {"contrato"})
     public void validarSchema() {
+
         putComLoginNoBody(
                 ENDPOINT_PUT_UPDATE.getEndPoint(),
-                requestBodyNameJob(USUARIO_VALIDO_UPDATE.getName(), USUARIO_VALIDO_UPDATE.getJob()))
+                requestBodyNameJob(
+                        USUARIO_VALIDO_UPDATE.getName(),
+                        USUARIO_VALIDO_UPDATE.getJob()))
                 .statusCode(SC_OK)
-                .body(matchesJsonSchemaInClasspath("arquivos/schemas/PutUpdateSchema.json"));
+                .body(matchesJsonSchemaInClasspath(
+                        "arquivos/schemas/PutUpdateSchema.json"));
     }
 }
