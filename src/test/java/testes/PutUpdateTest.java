@@ -2,7 +2,8 @@ package testes;
 
 import bases.BaseTest;
 import org.testng.annotations.Test;
-import static enums.EndPointEnum.ENDPOINT_PUT_UPDAYE;
+
+import static enums.EndPointEnum.ENDPOINT_PUT_UPDATE;
 import static enums.UsuarioEnum.USUARIO_VALIDO_UPDATE;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.apache.http.HttpStatus.SC_OK;
@@ -11,12 +12,12 @@ import static org.hamcrest.Matchers.matchesPattern;
 import static services.Services.putComLoginNoBody;
 import static utils.Common.requestBodyNameJob;
 
-
 public class PutUpdateTest extends BaseTest {
 
     @Test(groups = {"regressivo"})
     public void validarStatusCode200EResponseBody() {
-        putComLoginNoBody(ENDPOINT_PUT_UPDAYE.getEndPoint(),
+        putComLoginNoBody(
+                ENDPOINT_PUT_UPDATE.getEndPoint(),
                 requestBodyNameJob(USUARIO_VALIDO_UPDATE.getName(), USUARIO_VALIDO_UPDATE.getJob()))
                 .statusCode(SC_OK)
                 .body("name", equalTo("morpheus"))
@@ -26,8 +27,10 @@ public class PutUpdateTest extends BaseTest {
 
     @Test(groups = {"contrato"})
     public void validarSchema() {
-        putComLoginNoBody(ENDPOINT_PUT_UPDAYE.getEndPoint(), requestBodyNameJob(USUARIO_VALIDO_UPDATE.getName(), USUARIO_VALIDO_UPDATE.getJob()))
+        putComLoginNoBody(
+                ENDPOINT_PUT_UPDATE.getEndPoint(),
+                requestBodyNameJob(USUARIO_VALIDO_UPDATE.getName(), USUARIO_VALIDO_UPDATE.getJob()))
+                .statusCode(SC_OK)
                 .body(matchesJsonSchemaInClasspath("arquivos/schemas/PutUpdateSchema.json"));
     }
-
 }

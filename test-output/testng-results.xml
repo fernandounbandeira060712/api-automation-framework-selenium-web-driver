@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2026-06-25T18:51:02 BRT" name="Default suite" finished-at="2026-06-25T18:51:06 BRT" duration-ms="4440">
+    <groups>
+      <group name="contrato">
+        <method signature="PostRegisterSuccessfulTest.validarSchema()[pri:0, instance:testes.PostRegisterSuccessfulTest@491b9b8]" name="validarSchema" class="testes.PostRegisterSuccessfulTest"/>
+      </group> <!-- contrato -->
+      <group name="regressivo">
+        <method signature="PostRegisterSuccessfulTest.validarStatusCode200EResponseBody()[pri:0, instance:testes.PostRegisterSuccessfulTest@491b9b8]" name="validarStatusCode200EResponseBody" class="testes.PostRegisterSuccessfulTest"/>
+      </group> <!-- regressivo -->
+    </groups>
+    <test started-at="2026-06-25T18:51:02 BRT" name="Default test" finished-at="2026-06-25T18:51:06 BRT" duration-ms="4440">
+      <class name="testes.PostRegisterSuccessfulTest">
+        <test-method is-config="true" signature="setupSuite()[pri:0, instance:testes.PostRegisterSuccessfulTest@491b9b8]" started-at="2026-06-25T18:51:01 BRT" name="setupSuite" finished-at="2026-06-25T18:51:02 BRT" duration-ms="625" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setupSuite -->
+        <test-method signature="validarSchema()[pri:0, instance:testes.PostRegisterSuccessfulTest@491b9b8]" started-at="2026-06-25T18:51:02 BRT" name="validarSchema" finished-at="2026-06-25T18:51:05 BRT" duration-ms="2965" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validarSchema -->
+        <test-method signature="validarStatusCode200EResponseBody()[pri:0, instance:testes.PostRegisterSuccessfulTest@491b9b8]" started-at="2026-06-25T18:51:05 BRT" name="validarStatusCode200EResponseBody" finished-at="2026-06-25T18:51:06 BRT" duration-ms="1342" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validarStatusCode200EResponseBody -->
+      </class> <!-- testes.PostRegisterSuccessfulTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

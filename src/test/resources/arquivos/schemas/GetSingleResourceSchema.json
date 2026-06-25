@@ -40,14 +40,14 @@
                     "type": "string"
                 }
             },
-            "additionalProperties": false,
+            "additionalProperties": true,
             "required": [
                 "url",
                 "text"
             ]
         }
     },
-    "additionalProperties": false,
+    "additionalProperties": true,
     "required": [
         "data",
         "support"

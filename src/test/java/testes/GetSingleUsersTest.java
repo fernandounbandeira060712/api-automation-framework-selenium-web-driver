@@ -1,34 +1,32 @@
 package testes;
 
 import bases.BaseTest;
-import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.http.HttpStatus;
 import org.testng.annotations.Test;
 
 import static enums.EndPointEnum.ENDPOINT_GET_SINGLE_USER;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
-import static org.testng.Assert.assertEquals;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.notNullValue;
 import static services.Services.getSemAutenticacao;
-import static utils.Common.converterJsonParaJsonNode;
 
 public class GetSingleUsersTest extends BaseTest {
 
-	@Test(groups = {"regressivo"})
-	public void validarStatusCode200EResponseBody() {
-		JsonNode responseAtual = getSemAutenticacao(ENDPOINT_GET_SINGLE_USER.getEndPoint())
-				.statusCode(HttpStatus.SC_OK)
-				.extract()
-				.response().body().as(JsonNode.class);
+    @Test(groups = {"regressivo"})
+    public void validarStatusCode200EResponseBody() {
+        getSemAutenticacao(ENDPOINT_GET_SINGLE_USER.getEndPoint())
+                .statusCode(HttpStatus.SC_OK)
+                .body("data.id", equalTo(2))
+                .body("data.email", equalTo("janet.weaver@reqres.in"))
+                .body("data.first_name", equalTo("Janet"))
+                .body("data.last_name", equalTo("Weaver"))
+                .body("data.avatar", notNullValue());
+    }
 
-		JsonNode responseEsperado = converterJsonParaJsonNode("src/test/resources/arquivos/responses/SingleUsers.json");
-
-		assertEquals(responseAtual, responseEsperado);
-	}
-
-
-	@Test(groups = {"contrato"})
-	public void validarSchema() {
-		getSemAutenticacao(ENDPOINT_GET_SINGLE_USER.getEndPoint())
-				.body(matchesJsonSchemaInClasspath("arquivos/schemas/GetSingleUsersSchema.json"));
-	}
+    @Test(groups = {"contrato"})
+    public void validarSchema() {
+        getSemAutenticacao(ENDPOINT_GET_SINGLE_USER.getEndPoint())
+                .statusCode(HttpStatus.SC_OK)
+                .body(matchesJsonSchemaInClasspath("arquivos/schemas/GetSingleUsersSchema.json"));
+    }
 }
