@@ -1,37 +1,70 @@
 package testes;
 
-import bases.BaseTest;
-import com.fasterxml.jackson.databind.JsonNode;
-import org.testng.annotations.Test;
-
 import static enums.EndPointEnum.ENDPOINT_POST_REGISTER;
 import static enums.UsuarioEnum.USUARIO_VALIDO_POST_REGISTER_UNSUCCESSFUL;
-import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
-import static org.testng.AssertJUnit.assertEquals;
-import static services.Services.postComLoginNoBody;
-import static utils.Common.*;
+import static org.hamcrest.Matchers.equalTo;
+import static utils.Common.requestBodyEmail;
 
+import java.util.Map;
 
+import org.testng.annotations.Test;
+
+import bases.BaseTest;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
+import io.restassured.response.ValidatableResponse;
+
+@Epic("ReqRes API")
+@Feature("Authentication")
 public class PostRegisterUnuccessfulTest extends BaseTest {
 
-
     @Test(groups = {"regressivo"})
+    @Story("Realizar registro sem sucesso")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Valida registro sem sucesso quando o password não é informado.")
     public void validarStatusCode400EResponseBody() {
-        JsonNode responseAtual = postComLoginNoBody(ENDPOINT_POST_REGISTER.getEndPoint(),
-                requestBodyEmail(USUARIO_VALIDO_POST_REGISTER_UNSUCCESSFUL.getEmail()))
-                .statusCode(SC_BAD_REQUEST)
-                .extract().response().as(JsonNode.class);
 
-        JsonNode responseEsperado = converterJsonParaJsonNode("src/test/resources/arquivos/responses/PostRegisterUnsuccessful.json");
+        Map<String, Object> body = requestBodyEmail(
+                USUARIO_VALIDO_POST_REGISTER_UNSUCCESSFUL.getEmail());
 
-        assertEquals(responseAtual, responseEsperado);
+        ValidatableResponse response =
+                requestSteps.enviarPost(
+                        ENDPOINT_POST_REGISTER.getEndPoint(),
+                        body);
+
+        validationSteps.validarStatusCode(response, SC_BAD_REQUEST);
+
+        validationSteps.validarCampoComMatcher(
+                response,
+                "error",
+                equalTo("Missing password")
+        );
     }
 
     @Test(groups = {"contrato"})
+    @Story("Validar contrato do registro sem sucesso")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Valida o contrato JSON Schema do endpoint de registro sem sucesso.")
     public void validarSchema() {
-        postComLoginNoBody(ENDPOINT_POST_REGISTER.getEndPoint(), requestBodyEmail(USUARIO_VALIDO_POST_REGISTER_UNSUCCESSFUL.getEmail()))
-                .body(matchesJsonSchemaInClasspath("arquivos/schemas/PostRegisterUnsuccessfulschema.json"));
-    }
 
+        Map<String, Object> body = requestBodyEmail(
+                USUARIO_VALIDO_POST_REGISTER_UNSUCCESSFUL.getEmail());
+
+        ValidatableResponse response =
+                requestSteps.enviarPost(
+                        ENDPOINT_POST_REGISTER.getEndPoint(),
+                        body);
+
+        validationSteps.validarStatusCode(response, SC_BAD_REQUEST);
+
+        validationSteps.validarContratoJsonSchema(
+                response,
+                "arquivos/schemas/PostRegisterUnsuccessfulschema.json"
+        );
+    }
 }

@@ -4,6 +4,8 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import org.testng.annotations.BeforeSuite;
+import steps.ApiRequestSteps;
+import steps.ApiValidationSteps;
 import utils.ConfigurationManager;
 
 import static io.restassured.RestAssured.*;
@@ -12,7 +14,10 @@ import static io.restassured.config.RestAssuredConfig.newConfig;
 import static io.restassured.http.ContentType.JSON;
 import static org.apache.commons.codec.Charsets.UTF_8;
 
-public class BaseTest {
+public abstract class BaseTest {
+
+    protected final ApiRequestSteps requestSteps = new ApiRequestSteps();
+    protected final ApiValidationSteps validationSteps = new ApiValidationSteps();
 
     @BeforeSuite(groups = {"regressivo", "contrato"})
     public void setupSuite() {

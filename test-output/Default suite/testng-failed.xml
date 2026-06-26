@@ -3,12 +3,12 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="testes.PostRegisterSuccessfulTest">
+      <class name="testes.GetSingleResourceNotFoundTest">
         <methods>
-          <include name="validarStatusCode200EResponseBody"/>
+          <include name="validarStatusCode404EResponseBody"/>
           <include name="setupSuite"/>
         </methods>
-      </class> <!-- testes.PostRegisterSuccessfulTest -->
+      </class> <!-- testes.GetSingleResourceNotFoundTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
