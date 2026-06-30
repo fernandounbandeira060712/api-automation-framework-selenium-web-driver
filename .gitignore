@@ -1,6 +1,15 @@
-/.idea/
-/allure-results/
-/target/
+target/
+test-output/
+allure-results/
+allure-report/
+reports/
+bin/
+.settings/
+.classpath
+.project
+.idea/
+*.iml
+.DS_Store
 
 
 
